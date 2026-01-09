@@ -8,7 +8,7 @@ int main() {
     try {
         configureWorkingDirectory();
 
-        image8u image = load_image("data/00_photo_six_parts.jpg");
+        image8u image = load_image("data/00_photo_six_parts_downscaled_x4.jpg");
 
         image8u image_copy(image.width(), image.height(), image.channels());
 

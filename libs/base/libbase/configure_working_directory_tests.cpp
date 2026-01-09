@@ -7,4 +7,5 @@
 TEST(configureWorkingDirectory, ensureCanFindImage) {
     configureWorkingDirectory();
     EXPECT_TRUE(std::filesystem::is_regular_file("data/00_photo_six_parts.jpg"));
+    EXPECT_TRUE(std::filesystem::is_regular_file("data/00_photo_six_parts_downscaled_x4.jpg"));
 }

@@ -19,7 +19,7 @@ std::string getUnitCaseDebugDir() {
 TEST(debug_io, loadImageAndSaveCopy) {
     configureWorkingDirectory();
 
-    image8u img = load_image("data/00_photo_six_parts.jpg");
+    image8u img = load_image("data/00_photo_six_parts_downscaled_x4.jpg");
     debug_io::dump_image(getUnitCaseDebugDir() + "copy.jpg", img);
 }
 
