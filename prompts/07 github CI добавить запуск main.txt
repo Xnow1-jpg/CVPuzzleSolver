@@ -26,9 +26,7 @@ jobs:
       - name: Test (CTest)
         run: ctest --test-dir build -C Release --output-on-failure --no-tests=error -V
 
-      - name: Run application
-        shell: bash
-        run: |
-          exe="build/bin/Release/CVPuzzleSolver"
-          if [[ "$RUNNER_OS" == "Windows" ]]; then exe="${exe}.exe"; fi
-          "$exe"
+как добавить еще один этап - запуск executable? вот содержащий его CMakeLists одного из подпроектов:
+
+add_executable(CVPuzzleSolver main.cpp)
+target_link_libraries(CVPuzzleSolver PRIVATE libbase libimages)
