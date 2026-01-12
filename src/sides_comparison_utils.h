@@ -10,6 +10,8 @@
 
 std::vector<color8u> extractColors(const image8u &image, const std::vector<point2i> &pixels);
 
+bool isMostlyWhite(const std::vector<color8u> &colors, double percentile=5, uint8_t percentileMinIntensity=175);
+
 void drawImage(image8u &image, image8u &image_part, point2i offset);
 
 void drawRGBLine(image8u &image, std::vector<color8u> &a, point2i offset, int height);

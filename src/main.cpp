@@ -226,6 +226,12 @@ int main() {
                     const std::vector<color8u> colorsA = extractColors(objImages[objA], pixelsA);
                     const int channels = objImages[objA].channels();
 
+                    if (isMostlyWhite(colorsA)) {
+                        // пропускаем стороны которые почти полностью белые - это край всего изображения
+                        // ждя них нет соседних кусочков паззла, значит не нужно их сопоставлять (в результате сопоставляя с кем-то случайным)
+                        continue;
+                    }
+
                     // перебираем другой объект B и его сторону с которой мы хотим попробовать себя сравнить
                     for (int objB = 0; objB < objects_count; ++objB) {
                         if (objA == objB)
@@ -241,6 +247,12 @@ int main() {
                             // извлекаем цвета пикселей из картинки объекта A
                             const std::vector<color8u> colorsB = extractColors(objImages[objB], pixelsB);
                             rassert(channels == objImages[objB].channels(), 34712839741231);
+
+                            if (isMostlyWhite(colorsB)) {
+                                // пропускаем стороны которые почти полностью белые - это край всего изображения
+                                // ждя них нет соседних кусочков паззла, значит не нужно их сопоставлять (в результате сопоставляя с кем-то случайным)
+                                continue;
+                            }
 
                             // чтобы удобно было сравнивать - нужно чтобы эти две стороны были выравнены по длине
                             int n = std::min(colorsA.size(), colorsB.size());

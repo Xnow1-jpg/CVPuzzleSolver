@@ -1,5 +1,6 @@
 #include "sides_comparison_utils.h"
 
+#include <libbase/stats.h>
 #include <libbase/runtime_assert.h>
 
 #include <algorithm>
@@ -57,6 +58,18 @@ std::vector<color8u> extractColors(const image8u &image, const std::vector<point
     }
 
     return out;
+}
+
+bool isMostlyWhite(const std::vector<color8u> &colors, double percentile, uint8_t percentileMinIntensity) {
+    std::vector<float> intensities;
+    for (const color8u &color: colors) {
+        for (int c = 0; c < color.channels(); ++c) {
+            intensities.push_back(color(c));
+        }
+    }
+    double percentile_intensity = stats::percentile(intensities, percentile);
+    bool is_mostly_white = percentile_intensity > percentileMinIntensity;
+    return is_mostly_white;
 }
 
 void drawImage(image8u &image, image8u &image_part, point2i offset) {
